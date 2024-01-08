@@ -7,16 +7,20 @@ const nunjucks = require("nunjucks");
 //프로젝트 루트에 .env 파일 이용
 //다른 폴더, 파일을 이용하려면 매개변수에 지정
 require("dotenv").config();
+//config 메서도로 .env 파일의 내용이 읽혀와서, 각 행의 "키=값" 형태로 정의된 환경 변수들이 현재 프로세스의 환경 변수로 설정됩니다.
 
 const homeRouter = require("./home/homeRouter");
 const app = express();
 app.set("view engine", "html");
 nunjucks.configure("common/views", {
+  //Nunjucks 템플릿 파일이 위치한 디렉토리 경로
   express: app,
   watch: true,
+  //express: app를 사용하여 Express 애플리케이션을 Nunjucks에 등록하고, watch: true는 템플릿 파일의 변경을 감지하여 자동으로 다시 로드하도록 설정합니다.
 });
 
 app.use(morgan("dev"));
+//morgan은 HTTP 요청 로깅을 위한 미들웨어로, 개발 환경에서는 "dev" 형식으로 로깅합니다.
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
