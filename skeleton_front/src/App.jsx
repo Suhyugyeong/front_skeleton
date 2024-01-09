@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./home/component/Header";
 import Footer from "./home/component/Footer";
 import HomeMain from "./home/HomeMain";
+import UserMain from "./user/UserMain";
 
 const App = () => {
   return (
@@ -13,7 +14,8 @@ const App = () => {
       각 업무의 첫 화면만 등록하고 그 안에서의 화면전환은 중첩 라우팅으로 처리..
       즉, XXXMain만 이곳에서 등록하고 XXX 업무에 의한 화면 라우팅은 XXXMain에 명시*/}
       <Routes>
-        <Route path="/" element={<HomeMain />}></Route>
+        <Route path="/" element={<HomeMain />} />
+        <Route path="/user/*" element={<UserMain />} />
       </Routes>
       <Footer />
     </div>
