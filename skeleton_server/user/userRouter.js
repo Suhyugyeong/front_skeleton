@@ -3,12 +3,16 @@ const router = express.Router();
 const userDAO = require("./userDAO");
 
 //유저 업무와 관련된 요청이 들어왔을 때 그 요청을 처리하는 역할
+//http://localhost:8000/users/signup
 router.get("/signup", async (req, res, next) => {
   console.log("user router, singup...");
-  userDAO.signup(null, (resp) => {
-    //resp  ??
-    res.send("success");
-  });
+  userDAO.signup(
+    { name: "홍길동", email: "hong@hong.com", password: "1234" },
+    (resp) => {
+      //resp  ??
+      res.send(resp);
+    }
+  );
 });
 
 module.exports = router;
