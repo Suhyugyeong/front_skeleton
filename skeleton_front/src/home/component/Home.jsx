@@ -46,6 +46,7 @@ const Home = () => {
               </div>
             </div>
           </div>
+
           <div
             className="swiper-slide carousel-item-a intro-item bg-image"
             style={{ backgroundImage: "url(images/slide-2.jpg)" }}

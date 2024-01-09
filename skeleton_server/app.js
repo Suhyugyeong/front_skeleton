@@ -10,6 +10,7 @@ require("dotenv").config();
 //config 메서도로 .env 파일의 내용이 읽혀와서, 각 행의 "키=값" 형태로 정의된 환경 변수들이 현재 프로세스의 환경 변수로 설정됩니다.
 
 const homeRouter = require("./home/homeRouter");
+const userRouter = require("./user/userRouter");
 const app = express();
 app.set("view engine", "html");
 nunjucks.configure("common/views", {
@@ -29,7 +30,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //개발자가 각 파일로 분리시킨 라우터 등록
+//http://localhost:8000/users/signup
 app.use("/", homeRouter);
+app.use("/users", userRouter);
+
 //404
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다`);
