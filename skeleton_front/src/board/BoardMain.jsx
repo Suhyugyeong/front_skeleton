@@ -5,7 +5,9 @@ const BoardMain = () => {
   retrun(
     <div>
       <h2>Board Main</h2>
-      <Routes></Routes>
+      <Routes>
+        <Route path="/board/list" element={<BoardList />} />
+      </Routes>
     </div>
   );
 };

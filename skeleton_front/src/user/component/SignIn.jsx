@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 
 const SignIn = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); //페이지 이동 담당 navigate 함수 생성
 
   const [data, setData] = useState({ email: "", password: "" });
   const changeData = useCallback((e) => {

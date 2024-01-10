@@ -11,6 +11,8 @@ require("dotenv").config();
 
 const homeRouter = require("./home/homeRouter");
 const userRouter = require("./user/userRouter");
+// const boardRouter = require("./board/boardRouter");
+//이게 지금 필요한가?
 const app = express();
 app.set("view engine", "html");
 nunjucks.configure("common/views", {
@@ -33,6 +35,7 @@ app.use(express.urlencoded({ extended: true }));
 //http://localhost:8000/users/signup
 app.use("/", homeRouter);
 app.use("/users", userRouter);
+// app.use("/board", boardRouter);
 
 //404
 app.use((req, res, next) => {

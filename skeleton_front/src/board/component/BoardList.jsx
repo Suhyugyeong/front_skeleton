@@ -1,4 +1,29 @@
+import React, { useCallback, useState } from "react";
+import { useNavigate } from "react-router";
+import axios from "axios";
+
 const BoardList = () => {
+  const navigate = useNavigate();
+  const [data, setData] = useState({
+    id: "",
+    title: "",
+    name: "",
+    createAt: "",
+    cnt: 0,
+  });
+  const changeData = useCallback((e) => {
+    setData((data) => ({ ...data, [e.target.name]: e.target.value }));
+  }, []);
+  const boardList = useCallback(
+    async (e) => {
+      e.preventDefault();
+      const resp = await axios.post("http://localhost:8000/users/signin", data);
+      if (resp.data.status === 500) window.alert(resp.data.message);
+      else navigate("/");
+    },
+    [data, navigate]
+  );
+
   return (
     <main id="main">
       <section class="intro-single">
@@ -45,11 +70,11 @@ const BoardList = () => {
                 <tbody>
                   <tr>
                     {/* 이 위치에 데이터가 들어갈 것이다... */}
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{data.id}</td>
+                    <td>{data.title}</td>
+                    <td>{data.name}</td>
+                    <td>{data.createAt}</td>
+                    <td>{data.cnt}</td>
                   </tr>
                 </tbody>
                 <tfoot>
