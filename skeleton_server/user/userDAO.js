@@ -67,7 +67,7 @@ const userDAO = {
   },
   login: async (item, callback) => {
     //유저 입력 데이터 획득
-    const [email, password] = item;
+    const { email, password } = item; //json 으로 받아야되니까 중괄호
     let conn = null;
     try {
       console.log("00");
