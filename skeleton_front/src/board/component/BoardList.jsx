@@ -17,7 +17,10 @@ const BoardList = () => {
   const boardList = useCallback(
     async (e) => {
       e.preventDefault();
-      const resp = await axios.post("http://localhost:8000/users/signin", data);
+      const resp = await axios.post(
+        "http://localhost:8000/boards/boardList",
+        data
+      );
       if (resp.data.status === 500) window.alert(resp.data.message);
       else navigate("/");
     },
