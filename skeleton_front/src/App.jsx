@@ -3,6 +3,7 @@ import Header from "./home/component/Header";
 import Footer from "./home/component/Footer";
 import HomeMain from "./home/HomeMain";
 import UserMain from "./user/UserMain";
+import BoardMain from "./board/BoardMain";
 
 const App = () => {
   return (
@@ -16,6 +17,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomeMain />} />
         <Route path="/user/*" element={<UserMain />} />
+        <Route path="/board/list" element={<BoardMain />} />
+        {/* 이거 수정 ? app.js 말고 APP.jsx? */}
       </Routes>
       <Footer />
     </div>
