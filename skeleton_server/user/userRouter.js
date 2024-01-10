@@ -9,7 +9,7 @@ router.post("/signup", async (req, res, next) => {
   //front전달 데이터 획득
   const data = req.body;
   userDAO.signup(data, (resp) => {
-    //resp  ??
+    //이 함수는 사용자 등록을 담당하며, 콜백 함수 (resp) => { res.send(resp); }를 통해 클라이언트에 응답을 보냅니다.
     res.send(resp);
   });
 });
@@ -19,7 +19,7 @@ router.post("/signin", (req, res, next) => {
   const data = req.body;
   userDAO.login(data, (resp) => {
     //응답
-    res.json(resp);
+    res.send(resp);
   });
 });
 module.exports = router;

@@ -38,7 +38,7 @@ app.use("/board/list", boardRouter); //boards?
 
 //404
 app.use((req, res, next) => {
-  const error = new Error(`${req.method} ${req.url} 라우터가 없습니다`);
+  const error = new Error(`${req.method} ${req.url}  없습니다`);
   error.status - 404;
   //에러 발생.. 아래의 미들웨어가 처리 거임
   next(error);
