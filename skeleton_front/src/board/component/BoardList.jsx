@@ -1,31 +1,23 @@
 import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
-
 const BoardList = () => {
   const navigate = useNavigate();
-  const [data, setData] = useState({
-    id: "",
-    title: "",
-    name: "",
-    createAt: "",
-    cnt: 0,
+  const [boardList, setBoardList] = useState({
+    status: "",
+    message: "",
+    data: [],
   });
-  const changeData = useCallback((e) => {
-    setData((data) => ({ ...data, [e.target.name]: e.target.value }));
-  }, []);
-  const boardList = useCallback(
-    async (e) => {
-      e.preventDefault();
-      const resp = await axios.post(
-        "http://localhost:8000/boards/boardList",
-        data
-      );
-      if (resp.data.status === 500) window.alert(resp.data.message);
-      else navigate("/");
-    },
-    [data, navigate]
-  );
+
+  const getBoardList = useCallback(async () => {
+    const resp = await axios.get("http://localhost:8000/boards/boardList");
+    setBoardList(resp.data);
+  });
+
+  useEffect(() => {
+    //서버에서 최초에 한번만 데이터를 받아오면 되지 않을까 싶어서..
+    setBoardList();
+  }, [getBoardList]);
 
   return (
     <main id="main">
@@ -70,16 +62,19 @@ const BoardList = () => {
                     <th>조회수</th>
                   </tr>
                 </thead>
+
                 <tbody>
-                  <tr>
-                    {/* 이 위치에 데이터가 들어갈 것이다... */}
-                    <td>{data.id}</td>
-                    <td>{data.title}</td>
-                    <td>{data.name}</td>
-                    <td>{data.createAt}</td>
-                    <td>{data.cnt}</td>
-                  </tr>
+                  {boardList.data.map((board) => (
+                    <tr key={board.id}>
+                      <td>{board.id}</td>
+                      <td>{board.title}</td>
+                      <td>{board.name}</td>
+                      <td>{board.createAt}</td>
+                      <td>{board.cnt}</td>
+                    </tr>
+                  ))}
                 </tbody>
+
                 <tfoot>
                   <tr>
                     <td colSpan={5} class="text-end"></td>
