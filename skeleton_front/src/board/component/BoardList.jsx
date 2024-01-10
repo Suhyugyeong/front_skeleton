@@ -1,6 +1,7 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
+
 const BoardList = () => {
   const navigate = useNavigate();
   const [boardList, setBoardList] = useState({
@@ -16,30 +17,30 @@ const BoardList = () => {
 
   useEffect(() => {
     //서버에서 최초에 한번만 데이터를 받아오면 되지 않을까 싶어서..
-    setBoardList();
+    getBoardList();
   }, [getBoardList]);
 
   return (
     <main id="main">
-      <section class="intro-single">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 col-lg-8">
-              <div class="title-single-box">
-                <h1 class="title-single">Our Amazing Properties</h1>
-                <span class="color-text-a">Grid Properties</span>
+      <section className="intro-single">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12 col-lg-8">
+              <div className="title-single-box">
+                <h1 className="title-single">Our Amazing Properties</h1>
+                <span className="color-text-a">Grid Properties</span>
               </div>
             </div>
-            <div class="col-md-12 col-lg-4">
+            <div className="col-md-12 col-lg-4">
               <nav
                 aria-label="breadcrumb"
-                class="breadcrumb-box d-flex justify-content-lg-end"
+                className="breadcrumb-box d-flex justify-content-lg-end"
               >
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item">
+                <ol className="breadcrumb">
+                  <li className="breadcrumb-item">
                     <a href="#">Home</a>
                   </li>
-                  <li class="breadcrumb-item active" aria-current="page">
+                  <li className="breadcrumb-item active" aria-current="page">
                     Properties Grid
                   </li>
                 </ol>
@@ -48,11 +49,11 @@ const BoardList = () => {
           </div>
         </div>
       </section>
-      <section class="property-grid grid">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12">
-              <table class="table table-striped">
+      <section className="property-grid grid">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12">
+              <table className="table table-striped">
                 <thead>
                   <tr>
                     <th>번호</th>
@@ -77,7 +78,7 @@ const BoardList = () => {
 
                 <tfoot>
                   <tr>
-                    <td colSpan={5} class="text-end"></td>
+                    <td colSpan={5} className="text-end"></td>
                   </tr>
                 </tfoot>
               </table>

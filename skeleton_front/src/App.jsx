@@ -17,7 +17,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomeMain />} />
         <Route path="/user/*" element={<UserMain />} />
-        <Route path="/board/list" element={<BoardMain />} />
+        <Route path="/board/*" element={<BoardMain />} />
         {/* 이거 수정 ? app.js 말고 APP.jsx? */}
       </Routes>
       <Footer />
