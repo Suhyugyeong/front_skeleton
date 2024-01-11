@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom"; //
 import axios from "axios";
 
 const BoardList = () => {
@@ -78,7 +78,9 @@ const BoardList = () => {
 
                 <tfoot>
                   <tr>
-                    <td colSpan={5} className="text-end"></td>
+                    <td colSpan={5} className="text-end">
+                      <button className="btn btn-primary btn-sm">ADD</button>
+                    </td>
                   </tr>
                 </tfoot>
               </table>

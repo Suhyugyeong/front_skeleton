@@ -3,7 +3,7 @@ import Header from "./home/component/Header";
 import Footer from "./home/component/Footer";
 import HomeMain from "./home/HomeMain";
 import UserMain from "./user/UserMain";
-import BoardMain from "./board/BoardMain";
+import BoardMain from "./board/BoardMain"; //여기
 
 const App = () => {
   return (
@@ -18,7 +18,6 @@ const App = () => {
         <Route path="/" element={<HomeMain />} />
         <Route path="/user/*" element={<UserMain />} />
         <Route path="/board/*" element={<BoardMain />} />
-        {/* 이거 수정 ? app.js 말고 APP.jsx? */}
       </Routes>
       <Footer />
     </div>

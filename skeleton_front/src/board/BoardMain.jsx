@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import BoardList from "./component/BoardList";
+import BoardList from "./component/BoardList"; //
 
 const BoardMain = () => {
   return (
