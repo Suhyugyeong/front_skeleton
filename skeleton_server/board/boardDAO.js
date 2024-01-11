@@ -6,7 +6,7 @@ const sql = {
   insert: "INSERT INTO board (name, title, content) VALUES(?,?,?)",
   //프리페어드 스테이먼트(Prepared Statement)에서 사용되는 Placeholder입니다. 프리페어드 스테이먼트를 사용하면 SQL 쿼리에 동적으로 값을 삽입할 때, 값이 문자열이던지 숫자던지 상관없이 안전하게 처리할 수 있습니다.
   board: "SELECT * FROM board WHERE id = ?", //select문 where 10번글... id가 pk임
-  delete: "DELETE FROM board WHERE = ?",
+  delete: "DELETE FROM board WHERE id = ?",
   update: "UPDATE board SET title = ?, content = ? WHERE id = ?",
 };
 
@@ -42,7 +42,7 @@ const boardDAO = {
       callback({
         status: 200,
         message: "OK",
-        data: resp, //data 안 썼었음
+        data: resp,
       });
     } catch (error) {
       console.log(error);
@@ -73,8 +73,41 @@ const boardDAO = {
       if (conn !== null) conn.release();
     }
   },
-  delete: async (item, callback) => {},
-  update: async (item, callback) => {},
+  delete: async (item, callback) => {
+    let conn = null;
+    try {
+      conn = await getPool().getConnection();
+      const [resp] = await conn.query(sql.delete, item); //item은 데이터베이스 쿼리의 바인딩 매개변수에 해당합니다.
+      console.log("000", resp);
+      callback({
+        //비동기 작업이 완료되면
+        status: 200,
+        message: "OK",
+      });
+    } catch (error) {
+      console.log(error);
+      return { status: 500, message: "게시물 삭제 실패", error: error };
+    } finally {
+      if (conn !== null) conn.release();
+    }
+  },
+  update: async (item, callback) => {
+    let conn = null;
+    try {
+      conn = await getPool().getConnection();
+      const [resp] = await conn.query(sql.update, item);
+      console.log("000", resp);
+      callback({
+        status: 200,
+        message: "OK",
+      });
+    } catch (error) {
+      console.log(error);
+      return { status: 500, message: "게시물 수정 실패", error: error };
+    } finally {
+      if (conn !== null) conn.release();
+    }
+  },
 };
 
 module.exports = boardDAO;

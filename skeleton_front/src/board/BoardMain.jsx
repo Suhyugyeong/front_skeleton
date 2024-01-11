@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import BoardList from "./component/BoardList";
 import BoardInsert from "./component/BoardInsert";
 import BoardDetail from "./component/BoardDetail";
+import BoardUpdate from "./component/BoardUpdate";
 
 const BoardMain = () => {
   return (
@@ -14,6 +15,7 @@ const BoardMain = () => {
         <Route path="/insert" element={<BoardInsert />} />
         <Route path="/detail/:id" element={<BoardDetail />} />
         {/* /board/:id가 아니라 detail/:id로 들어가야됨 근데 왜? */}
+        <Route path="/update" element={<BoardUpdate />} />
       </Routes>
     </div>
   );
