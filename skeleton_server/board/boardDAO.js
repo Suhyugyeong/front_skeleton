@@ -5,9 +5,9 @@ const sql = {
   boardList:
     //   번호, 타이틀, 이름, 작성일, 조회수
     //조회니까 SELECT??
-    "select * from board",
+    "SELECT * FROM board",
   //"SELECT id, title, name, createAt, cnt FROM board"
-  insert: "",
+  insert: "SELECT name, title, content FROM board",
 };
 
 const boardDAO = {
@@ -31,7 +31,22 @@ const boardDAO = {
     }
   },
   insert: async (item, callback) => {
-    //매개변수 두개인 이유 inser 데이터 받아야 되니까
+    //매개변수 두개인 이유 insert 데이터 받아야 되니까
+    const { name, title, content } = item;
+    let conn = null;
+    try {
+      console.log("00");
+      conn = await getPool().getConnection();
+      console.log("11");
+      callback({
+        status: 200,
+        message: "OK",
+      });
+    } catch (error) {
+      return { status: 500, message: "게시물 입력 실패", error: error };
+    } finally {
+      if (conn !== null) conn.release();
+    }
   },
 };
 

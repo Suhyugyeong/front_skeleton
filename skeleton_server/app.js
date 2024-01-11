@@ -12,6 +12,7 @@ require("dotenv").config();
 const homeRouter = require("./home/homeRouter");
 const userRouter = require("./user/userRouter");
 const boardRouter = require("./board/boardRouter"); //여기랑
+
 const app = express();
 app.set("view engine", "html");
 nunjucks.configure("common/views", {

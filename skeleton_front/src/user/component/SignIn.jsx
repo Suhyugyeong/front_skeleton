@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const SignIn = () => {
@@ -8,7 +8,7 @@ const SignIn = () => {
   const [data, setData] = useState({ email: "", password: "" });
   const changeData = useCallback((e) => {
     setData((data) => ({ ...data, [e.target.name]: e.target.value }));
-  }, []);
+  }, []); //입력 필드의 값이 변경될 때마다 상태가 업데이트되어 사용자의 입력을 추적
   const login = useCallback(
     async (e) => {
       e.preventDefault();
