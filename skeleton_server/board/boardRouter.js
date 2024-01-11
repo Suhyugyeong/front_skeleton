@@ -26,12 +26,17 @@ router.post("/insert", (req, res, next) => {
 
 router.get("/board/:id", function (req, res, next) {
   console.log("board router...");
-  const { id } = req.params;
-  boardDAO.board((resp) => {
-    res.json({ id: id }, resp);
+  // const { id } = req.params;
+  const id = req.params.id;
+  boardDAO.board(id, (resp) => {
+    res.json(resp); //내 식대로 하면 왜 굳이 id를 쓰냐...
   });
 });
 //post방식 유저입력은 post 방식으로 프론트부터 개발하는게 보편적
 //get방식 프론트가 개발되기 전 백엔드 먼저개발하고 브라우저에서 직접 url입력해서 테스트 되어야
 
+router.post("/delete/:id", function (req, res, next) {});
+router.post("/update", function (req, res, next) {
+  //업데이트는 body 로 받겠다..
+});
 module.exports = router;

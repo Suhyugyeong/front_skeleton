@@ -20,7 +20,7 @@ module.exports = function getPool() {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    connctionLimit: 10,
+    connectionLimit: 10,
   };
   return mysql.createPool(config);
 };
