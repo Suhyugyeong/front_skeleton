@@ -133,7 +133,7 @@ const BoardDetail = () => {
     content: "",
     title: "",
     cnt: "",
-    createdAt: "",
+    createAt: "",
   });
 
   //서버 연동을 위한 함수.. 어디선가 호출한다..
@@ -143,6 +143,8 @@ const BoardDetail = () => {
   };
 
   const deleteBoard = async (id) => {
+    await axios.post("http://localhost:8000/boards/delete/" + id); //get이 아니라 post
+    navigate("/board/list");
     //버튼 클릭시에 호출되어.. 서버에 매개변수 데이터 삭제되게 요청..
     //삭제후 화면 목록으로 자동 전환..
   };
@@ -195,7 +197,7 @@ const BoardDetail = () => {
                   </tr>
                   <tr>
                     <td>작성일</td>
-                    <td>{board.createdAt}</td>
+                    <td>{board.createAt}</td>
                   </tr>
                   <tr>
                     <td colSpan="2" className="text-end">
@@ -207,14 +209,14 @@ const BoardDetail = () => {
                         목록
                       </button>{" "}
                       <button
-                        type="submit"
+                        type="button"
                         className="btn btn-warning btn-sm"
                         onClick={() => navigate("/board/update/" + board.id)}
                       >
                         수정
                       </button>{" "}
                       <button
-                        type="submit"
+                        type="button"
                         className="btn btn-warning btn-sm"
                         onClick={() => deleteBoard(board.id)}
                       >

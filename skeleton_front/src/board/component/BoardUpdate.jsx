@@ -7,6 +7,33 @@ const BoardUpdate = () => {
   //컴포넌트가 나오자 마자.. 서버에서 데이터 획득..
   //획득한 데이터가 화면에 출력되고.. 유저가 수정...
   //즉 서버 연동은 2번 발생한다..
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const [board, setBoard] = useState({
+    id: "",
+    name: "",
+    email: "",
+    title: "",
+    content: "",
+  });
+
+  const changeData = (e) => {
+    setBoard({ ...board, [e.target.name]: e.target.value });
+  };
+  //화면에 찍기 위한 데이터부터 획득
+  const getData = async () => {
+    const resp = await axios.get("http://localhost:8000/boards/board" + id);
+    setBoard(resp.data.data);
+  };
+  //콜하기
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const updateBoard = async (e) => {
+    await axios.post("http://localhost:8000/boards/update/", board);
+    navigate("/board/list");
+  };
   return (
     <main id="main">
       <section className="intro-single">
@@ -77,7 +104,7 @@ const BoardUpdate = () => {
                         취소
                       </button>{" "}
                       <button
-                        type="submit"
+                        type="button"
                         className="btn btn-warning btn-sm"
                         onClick={updateBoard}
                       >

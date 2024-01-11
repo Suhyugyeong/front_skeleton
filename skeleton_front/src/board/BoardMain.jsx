@@ -15,7 +15,7 @@ const BoardMain = () => {
         <Route path="/insert" element={<BoardInsert />} />
         <Route path="/detail/:id" element={<BoardDetail />} />
         {/* /board/:id가 아니라 detail/:id로 들어가야됨 근데 왜? */}
-        <Route path="/update" element={<BoardUpdate />} />
+        <Route path="/update/:id" element={<BoardUpdate />} />
       </Routes>
     </div>
   );

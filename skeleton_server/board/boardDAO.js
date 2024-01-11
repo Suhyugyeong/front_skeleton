@@ -77,7 +77,7 @@ const boardDAO = {
     let conn = null;
     try {
       conn = await getPool().getConnection();
-      const [resp] = await conn.query(sql.delete, item); //item은 데이터베이스 쿼리의 바인딩 매개변수에 해당합니다.
+      const [resp] = await conn.query(sql.delete, item); //item은 데이터베이스 쿼리의 바인딩 매개변수에 해당합니다. 여기서 item이 id
       console.log("000", resp);
       callback({
         //비동기 작업이 완료되면
@@ -95,7 +95,11 @@ const boardDAO = {
     let conn = null;
     try {
       conn = await getPool().getConnection();
-      const [resp] = await conn.query(sql.update, item);
+      const [resp] = await conn.query(sql.update, [
+        item.title,
+        item.content,
+        item.id,
+      ]); //여기선 데이터 많으니까 배열로
       console.log("000", resp);
       callback({
         status: 200,

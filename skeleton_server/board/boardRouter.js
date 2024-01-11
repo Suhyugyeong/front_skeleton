@@ -36,6 +36,7 @@ router.get("/board/:id", function (req, res, next) {
 //get방식 프론트가 개발되기 전 백엔드 먼저개발하고 브라우저에서 직접 url입력해서 테스트 되어야
 
 router.post("/delete/:id", function (req, res, next) {
+  //url id니까 그냥 params로 받은거임
   console.log("delete router...");
   const id = req.params.id;
   boardDAO.delete(id, (resp) => {
@@ -43,7 +44,7 @@ router.post("/delete/:id", function (req, res, next) {
   });
 });
 router.post("/update", function (req, res, next) {
-  //업데이트는 body 로 받겠다..
+  //post는 데이터가 body ..업데이트는 body 로 받겠다..
   console.log("update router...");
   const data = req.body;
   boardDAO.update(data, (resp) => {
