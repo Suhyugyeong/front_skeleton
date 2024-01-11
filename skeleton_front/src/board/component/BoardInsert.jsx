@@ -9,10 +9,23 @@ const BoardInsert = () => {
     title: "",
     content: "",
   });
+  const changeData = useCallback(
+    (e) => {
+      setBoardInsert({ ...boardInsert, [e.target.name]: e.target.value });
+    },
+    [boardInsert]
+  );
 
-  const insert = useCallback(async (e) => {
-    const resp = await axios.post("http://localhost:8000/boards/insert", data);
-  });
+  //등록 버튼 클릭시에
+  const insertBoard = useCallback(
+    async (e) => {
+      e.preventDefault();
+      await axios.post("http://localhost:8000/boards/insert", boardInsert);
+      navigate("/board/list");
+    },
+    [navigate, boardInsert]
+  );
+
   return (
     //템플릿 껍데기
     <main id="main">
@@ -52,7 +65,13 @@ const BoardInsert = () => {
                   <tr>
                     <td>이름</td>
                     <td>
-                      <input type="text" className="form-control" name="name" />
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="name"
+                        value={boardInsert.name}
+                        onChange={changeData}
+                      />
                     </td>
                   </tr>
                   <tr>
@@ -62,6 +81,8 @@ const BoardInsert = () => {
                         type="text"
                         className="form-control"
                         name="title"
+                        value={boardInsert.title}
+                        onChange={changeData}
                       />
                     </td>
                   </tr>
@@ -73,16 +94,25 @@ const BoardInsert = () => {
                         rows="10"
                         name="content"
                         className="form-control"
+                        value={boardInsert.content}
+                        onChange={changeData}
                       ></textarea>
                     </td>
                   </tr>
                   <tr>
-                    <td colspan="2" className="text-end">
-                      <button type="button" className="btn btn-primary btn-sm">
+                    <td colSpan="2" className="text-end">
+                      <button
+                        type="button"
+                        className="btn btn-primary btn-sm"
+                        onClick={() => navigate("/board/list")}
+                      >
                         취소
                       </button>
-                      {""}
-                      <button type="submit" className="btn btn-warning btn-sm">
+                      <button
+                        type="submit"
+                        className="btn btn-warning btn-sm"
+                        onClick={insertBoard}
+                      >
                         입력
                       </button>
                     </td>

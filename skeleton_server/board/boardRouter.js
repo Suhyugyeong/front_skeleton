@@ -14,15 +14,17 @@ router.get("/boardList", function (req, res, next) {
   });
 });
 
-router.get("/insert", (req, res, next) => {
-  //get이 아니라 post..?
+router.post("/insert", (req, res, next) => {
+  //get이 아니라 post..? get방식으로 실행하라는 말은??
   console.log("insert router...");
-  const data = req.body;
-  boardDAO.boardInsert(data, (resp) => {
-    //boardInsert....여기...
-    res.send(resp);
+  const data = req.body; //post 방식은 request body를 통해서 데이터를 전달하는 방식
+  boardDAO.insert(data, (resp) => {
+    //boardInsert....여기... insert엿음
+    res.json(resp); //send 대신 json
   });
 });
+
+router.get("/board/:id", function (req, res, next) {});
 //post방식 유저입력은 post 방식으로 프론트부터 개발하는게 보편적
 //get방식 프론트가 개발되기 전 백엔드 먼저개발하고 브라우저에서 직접 url입력해서 테스트 되어야
 

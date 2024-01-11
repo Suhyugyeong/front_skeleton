@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; //
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const BoardList = () => {
@@ -20,9 +20,9 @@ const BoardList = () => {
     getBoardList();
   }, [getBoardList]);
 
-  const AddButtonClick = () => {
-    navigate("/board/insert");
-  };
+  // const AddButtonClick = () => {
+  //   navigate("/board/insert");
+  // }; 안에 집어넣음
 
   return (
     <main id="main">
@@ -72,7 +72,11 @@ const BoardList = () => {
                   {boardList.data.map((board) => (
                     <tr key={board.id}>
                       <td>{board.id}</td>
-                      <td>{board.title}</td>
+                      <td>
+                        <Link to={"/board/detail/" + board.id}>
+                          {board.title}
+                        </Link>
+                      </td>
                       <td>{board.name}</td>
                       <td>{board.createAt}</td>
                       <td>{board.cnt}</td>
@@ -85,7 +89,7 @@ const BoardList = () => {
                     <td colSpan={5} className="text-end">
                       <button
                         className="btn btn-primary btn-sm"
-                        onClick={AddButtonClick}
+                        onClick={() => navigate("/board/insert")}
                       >
                         ADD
                       </button>
