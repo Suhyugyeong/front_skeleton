@@ -3,9 +3,8 @@ const getPool = require("../common/pool"); //dbms collection
 //이곳에 필요한 sql 등록
 const sql = {
   boardList: "SELECT * FROM board",
-  //"SELECT id, title, name, createAt, cnt FROM board"
-  insert: "SELECT INTO board (name, title, content) VALUES(?,?,?)", //select into... ??? 써야함
-  board: "", //select문 where 10번글... id가 pk임
+  insert: "INSERT INTO board (name, title, content) VALUES(?,?,?)",
+  board: "SELECT * FROM board WHERE id", //select문 where 10번글... id가 pk임
 };
 
 const boardDAO = {
@@ -52,6 +51,26 @@ const boardDAO = {
   },
   board: async (item, callback) => {
     //item은 몇 번 글이냐,
+    let conn = null;
+    try {
+      conn = await getPool().getConnection();
+      const [resp] = await conn.query(sql.board, [
+        item.name,
+        item.title,
+        item.content,
+      ]); //sql문 자체를 이해못한듯
+      console.log("000", resp);
+      callback({
+        status: 200,
+        message: "OK",
+        data: resp, //data 안 썼었음
+      });
+    } catch (error) {
+      console.log(error);
+      return { status: 500, message: "게시물 조회 실패", error: error };
+    } finally {
+      if (conn !== null) conn.release();
+    }
   },
 };
 
