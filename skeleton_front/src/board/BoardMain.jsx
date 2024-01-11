@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import BoardList from "./component/BoardList";
 import BoardInsert from "./component/BoardInsert";
+import BoardDetail from "./component/BoardDetail";
 
 const BoardMain = () => {
   return (
@@ -10,6 +11,7 @@ const BoardMain = () => {
         <Route path="/list" element={<BoardList />} />
         {/* /board/list  대신 list */}
         <Route path="/insert" element={<BoardInsert />} />
+        <Route path="/board/:id" element={<BoardDetail />} />
       </Routes>
     </div>
   );

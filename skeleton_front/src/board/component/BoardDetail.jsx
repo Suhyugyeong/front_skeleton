@@ -3,6 +3,20 @@ import { Link, useNavigate, useParams } from "react-router-dom"; //
 import axios from "axios";
 
 const BoardDetail = () => {
+  const navigate = useNavigate();
+  const [boardDetail, setBoardDetail] = useState({
+    status: "",
+    message: "",
+    data: [],
+  });
+  const getBoardDetail = useCallback(async () => {
+    const resp = await axios.get(
+      "http://localhost:8000/boards/board/:id",
+      boardDetail
+    );
+    setBoardDetail(resp.data);
+  }, []);
+
   return (
     <main id="main">
       <section className="intro-single">
@@ -40,7 +54,7 @@ const BoardDetail = () => {
                 <tbody>
                   <tr>
                     <td>타이틀</td>
-                    <td>{/*  */}</td>
+                    <td>{board.id}</td>
                   </tr>
                   <tr>
                     <td>내용</td>
