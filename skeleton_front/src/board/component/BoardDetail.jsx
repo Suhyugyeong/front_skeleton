@@ -115,7 +115,6 @@
 // };
 
 // export default BoardDetail;
-
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import React, { useCallback, useState, useEffect } from "react";
@@ -133,7 +132,7 @@ const BoardDetail = () => {
     content: "",
     title: "",
     cnt: "",
-    createAt: "",
+    createdAt: "",
   });
 
   //서버 연동을 위한 함수.. 어디선가 호출한다..
@@ -143,10 +142,10 @@ const BoardDetail = () => {
   };
 
   const deleteBoard = async (id) => {
-    await axios.post("http://localhost:8000/boards/delete/" + id); //get이 아니라 post
-    navigate("/board/list");
     //버튼 클릭시에 호출되어.. 서버에 매개변수 데이터 삭제되게 요청..
     //삭제후 화면 목록으로 자동 전환..
+    await axios.post("http://localhost:8000/boards/delete/" + id);
+    navigate("/board/list");
   };
 
   useEffect(() => {
@@ -197,7 +196,7 @@ const BoardDetail = () => {
                   </tr>
                   <tr>
                     <td>작성일</td>
-                    <td>{board.createAt}</td>
+                    <td>{board.createdAt}</td>
                   </tr>
                   <tr>
                     <td colSpan="2" className="text-end">
