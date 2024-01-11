@@ -14,7 +14,7 @@ router.get("/boardList", function (req, res, next) {
   });
 });
 
-router.post("/insert", (req, res, next) => {
+router.get("/insert", (req, res, next) => {
   //get이 아니라 post..?
   console.log("insert router...");
   const data = req.body;

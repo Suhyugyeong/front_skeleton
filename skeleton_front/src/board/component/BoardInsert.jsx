@@ -4,7 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 const BoardInsert = () => {
   const navigate = useNavigate();
-  const [data, setData] = useState({ name: "", title: "", content: "" });
+  const [boardInsert, setBoardInsert] = useState({
+    name: "",
+    title: "",
+    content: "",
+  });
 
   const insert = useCallback(async (e) => {
     const resp = await axios.post("http://localhost:8000/boards/insert", data);

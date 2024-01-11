@@ -20,6 +20,10 @@ const BoardList = () => {
     getBoardList();
   }, [getBoardList]);
 
+  const AddButtonClick = () => {
+    navigate("/board/insert");
+  };
+
   return (
     <main id="main">
       <section className="intro-single">
@@ -79,7 +83,12 @@ const BoardList = () => {
                 <tfoot>
                   <tr>
                     <td colSpan={5} className="text-end">
-                      <button className="btn btn-primary btn-sm">ADD</button>
+                      <button
+                        className="btn btn-primary btn-sm"
+                        onClick={AddButtonClick}
+                      >
+                        ADD
+                      </button>
                     </td>
                   </tr>
                 </tfoot>
