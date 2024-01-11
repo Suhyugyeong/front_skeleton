@@ -1,10 +1,11 @@
 const getPool = require("../common/pool"); //dbms collection
 
-//이곳에 필요한 sql 등록
+//sql 객체에 sql 쿼리를 정의
 const sql = {
   boardList: "SELECT * FROM board",
   insert: "INSERT INTO board (name, title, content) VALUES(?,?,?)",
-  board: "SELECT * FROM board WHERE id", //select문 where 10번글... id가 pk임
+  //프리페어드 스테이먼트(Prepared Statement)에서 사용되는 Placeholder입니다. 프리페어드 스테이먼트를 사용하면 SQL 쿼리에 동적으로 값을 삽입할 때, 값이 문자열이던지 숫자던지 상관없이 안전하게 처리할 수 있습니다.
+  board: "SELECT * FROM board WHERE id = ?", //select문 where 10번글... id가 pk임
 };
 
 const boardDAO = {
@@ -15,7 +16,6 @@ const boardDAO = {
     try {
       conn = await getPool().getConnection();
       //db insert
-      //여기서 sql.boardList 가 맞는지 ...?
       const [resp] = await conn.query(sql.boardList, []); //지우거나 [] 원래 난 아무것도 안 적음
       console.log("000", resp); //여기서 콘솔 한번 찍어주는 거 추천
       callback({ status: 200, message: "ok", data: resp }); //이걸 전달하겠다 ppt21페이지처럼
@@ -55,15 +55,19 @@ const boardDAO = {
     try {
       conn = await getPool().getConnection();
       const [resp] = await conn.query(sql.board, [
+        //conn.query로 sql 쿼리 실행
+        item.id,
         item.name,
         item.title,
         item.content,
-      ]); //sql문 자체를 이해못한듯
+        item.cnt,
+        item.createAt,
+      ]);
       console.log("000", resp);
       callback({
         status: 200,
         message: "OK",
-        data: resp, //data 안 썼었음
+        data: resp,
       });
     } catch (error) {
       console.log(error);
