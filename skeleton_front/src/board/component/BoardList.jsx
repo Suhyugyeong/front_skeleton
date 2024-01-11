@@ -13,7 +13,7 @@ const BoardList = () => {
   const getBoardList = useCallback(async () => {
     const resp = await axios.get("http://localhost:8000/boards/boardList");
     setBoardList(resp.data);
-  });
+  }, []); //[]추가 21페이지 나머지 식은 넘어오니까 data만직으면 됨
 
   useEffect(() => {
     //서버에서 최초에 한번만 데이터를 받아오면 되지 않을까 싶어서..

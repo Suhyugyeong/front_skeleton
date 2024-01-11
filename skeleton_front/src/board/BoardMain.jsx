@@ -6,7 +6,8 @@ const BoardMain = () => {
     <div>
       <h2>Board Main</h2>
       <Routes>
-        <Route path="/board/list" element={<BoardList />} />
+        <Route path="/list" element={<BoardList />} />
+        {/* /board/list  대신 list */}
       </Routes>
     </div>
   );
