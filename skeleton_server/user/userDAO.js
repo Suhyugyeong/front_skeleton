@@ -1,9 +1,12 @@
 const bcrypt = require("bcrypt"); //bcrypt: 비밀번호 해싱을 위한 라이브러리.
 const getPool = require("../common/pool"); //데이터베이스 연결을 관리하는 풀을 반환하는 함수
 const sql = {
+  //sql 쿼리를 담고 있는 객체
   //이메일 중복을 체크하기 위한 sql
   //?는 프로그램 데이터가 들어갈 자리
+  //이는 주로 사용자의 로그인 시, 해당 이메일이 데이터베이스에 존재하는지를 확인하는 데 사용될 것
   checkId: "SELECT * FROM user WHERE email = ?",
+  //이 쿼리는 user 테이블에 새로운 사용자 정보를 추가
   //?는 이후에 입력될 값을 나타내며, 프리페어드 스테이트먼트(Prepared Statement)에서 실제 값으로 대체됩니다.
   //?는 프리페어드 스테이트먼트에 사용되는 매개변수
   signup: "INSERT INTO user (name, email, password) VALUES (?,?,?)",
@@ -27,7 +30,7 @@ const userDAO = {
       console.log("dao", item);
 
       //이메일 check sql 실행
-      const [respCheck] = await conn.query(sql.checkId, item.email);
+      const [respCheck] = await conn.query(sql.checkId, item.email); //item 객체에서 email 프로퍼티를 추출한 값, 단일값
       //sql.checkId에 정의된 SQL 쿼리를 실행하고, item.email을 해당 쿼리에 전달합니다.
       if (respCheck[0]) {
         //배열의 첫 번째 요소가 존재하고, 값이 있는 경우(즉, 배열이 비어있지 않은 경우), 조건문은 참
@@ -48,6 +51,8 @@ const userDAO = {
           else {
             //db insert
             const [resp] = await conn.query(sql.signup, [
+              //conn.query는 데이터베이스에 대한 쿼리를 실행
+              //conn.query 메서드는 배열 형태의 결과를 반환하므로, 배열 디스트럭처링을 사용:배열의 첫 번째 요소만을 추출하는 구문
               item.name,
               item.email,
               hash,
@@ -66,18 +71,21 @@ const userDAO = {
     }
   },
   login: async (item, callback) => {
+    //매개변수(parameter)는 함수의 정의 부분에서 선언되는 변수이고, 함수가 호출될 때 인자(argument)로 전달되는 값이 해당 매개변수에 자동으로 할당됩니다.
+    //함수 내부에서 이 매개변수를 사용할 수 있습니다.
+    //따라서 함수의 매개변수는 별도의 const나 let 선언이 필요 없이 함수 내부에서 직접 사용할 수 있습니다
     //유저 입력 데이터 획득
-    const { email, password } = item; //json 으로 받아야되니까 중괄호
+    const { email, password } = item; //json 으로 받아야되니까 중괄호 ?????????????????
     let conn = null;
     try {
       console.log("00");
       conn = await getPool().getConnection();
       console.log("11");
       //sql 실행.. 리턴값은 db에 저장된 유저 정보
-      const [user] = await conn.query(sql.checkId, [email]);
+      const [user] = await conn.query(sql.checkId, [email]); //[email]은 배열 리터럴 구문이니까 email을 담은 배열을 생성
       console.log("22", user);
       if (!user[0]) {
-        //db에 데이터가 없다는 이야기.. 유저가 입력한 이메일이 잘못되었다는 이야기
+        //db에 데이터가 없다는 이야기.. 유저가 입력한 이메일이 잘못되었다는 이야기, 배열 user가 비어있거나 첫 번째 요소가 존재하지 않을 때 참이 되는 조건
         callback({ status: 500, message: "아이디, 패스워드를 확인해주세요." });
       } else {
         //db 데이터가 있다는 이야기.. 유저 입력 비밀번호와 db에서 뽑은 비밀번호 비교
@@ -85,11 +93,13 @@ const userDAO = {
         //db에 비밀번호가 해시로 저장되어 있어서.. 유저 입력 비밀번호를 해시로 만들어 비교해야 한다..
         bcrypt.compare(password, user[0].password, async (error, result) => {
           if (error) {
+            //해당 사용자의 이메일이 없음
             callback({
               status: 500,
               message: "아이디, 패스워드를 확인해주세요.",
             });
           } else if (result) {
+            //result가 true이면, 사용자의 아이디와 패스워드가 일치했다는 것을 의미
             console.log("44");
             callback({
               status: 200,
@@ -98,6 +108,7 @@ const userDAO = {
               email: user[0].email,
             });
           } else {
+            //bcrypt.compare 메서드가 정상적으로 실행되었지만, 비밀번호가 일치하지 않는 경우
             callback({
               status: 500,
               message: "아이디, 패스워드를 확인해주세요.",
