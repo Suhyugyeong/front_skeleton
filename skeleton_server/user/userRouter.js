@@ -3,6 +3,7 @@ const router = express.Router(); //Express.js에서 라우터 객체를 생성�
 const userDAO = require("./userDAO");
 
 //유저 업무와 관련된 요청이 들어왔을 때 그 요청을 처리하는 역할
+//post니까 생성
 //http://localhost:8000/users/signup
 router.post("/signup", async (req, res, next) => {
   //여기서 async를 사용한 이유는 userDAO.signup 함수가 비동기 작업을 수행하기 때문..
