@@ -7,7 +7,7 @@ router.get("/", function (req, res, next) {
   //index.html이 출력되면서 그곳에 {} 정보 넘긴 것..
   //nunjucks 설정이 app.js에 되어 있어야 하고..
   res.render("index", { title: "express" });
-  // "index"라는 템플릿을 렌더링하고, { title: "express" }라는 데이터를 템플릿에 전달합니다.
+  // "index"라는 템플릿을 렌더링하고(여기서는 index.html임), { title: "express" }라는 데이터를 템플릿에 전달합니다.
 });
 
 module.exports = router; //이 라우터 객체를 모듈로 내보냅니다.
