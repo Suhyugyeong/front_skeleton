@@ -5,6 +5,9 @@ const userDAO = require("./userDAO");
 //유저 업무와 관련된 요청이 들어왔을 때 그 요청을 처리하는 역할
 //http://localhost:8000/users/signup
 router.post("/signup", async (req, res, next) => {
+  //여기서 async를 사용한 이유는 userDAO.signup 함수가 비동기 작업을 수행하기 때문..
+  //일반적으로 데이터베이스 쿼리나 다른 비동기적 작업을 수행하는 함수를 호출할 때는 해당 함수가 Promise를 반환, 이를 처리하기 위해 async 사용
+  //그대신 function을 사용하는 이유는 동기적 작업을 수행하거나, 비동기 작업을 수행하나 Promise를 반환하지 않는 경우
   console.log("user router, singup..."); //async는 비동기적인 작업이 필요할 때.. 아래는 왜 async 처리하지 않음?????????????????
   //front전달 데이터 획득
   const data = req.body; //req는 요청(request) 객체를 나타내며, req.body는 HTTP POST 요청의 본문(body)에 포함된 데이터
@@ -17,6 +20,9 @@ router.post("/signup", async (req, res, next) => {
 });
 
 router.post("/signin", (req, res, next) => {
+  //async 키워드는 함수 내에서 비동기 작업을 수행할 때 사용되며, 함수가 Promise를 반환하고 await 키워드를 사용할 때 필요합니다.
+  //따라서 비동기 작업이 필요한 부분에 async를 사용하는 것이 일반적인 패턴입니다.
+  //그럼 왜 여기서 async를 사용하지 않았는데???
   console.log("login router...");
   const data = req.body;
   userDAO.login(data, (resp) => {

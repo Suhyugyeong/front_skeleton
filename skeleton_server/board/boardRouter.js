@@ -5,17 +5,14 @@ const boardDAO = require("./boardDAO");
 //function 대신 async 넣어도 되나? ㄴㄴ
 router.get("/boardList", function (req, res, next) {
   console.log("boardList loading...");
-  // const data = req.query; //여기빠지고
-  //res.query.. body가 아니라..
-  //여기서 boardList가 맞나?
+  // const data = req.query; 가 아니라, data가 필요가 없으니까
   boardDAO.boardList((resp) => {
-    //여기서 data지우고 data, (resp)
-    res.json(resp); //json데이터 스타일이니까 send 대신
+    res.json(resp); //json데이터 스타일이니까 send 대신 가독성과 의도 명시를 위해서.. 근데 어떤게 json이고 어떤게 send로 처리해야하는지 어떻게 구분함???
   });
 });
 
 router.post("/insert", (req, res, next) => {
-  //get이 아니라 post..? get방식으로 실행하라는 말은??
+  //get이 아니라 post..? get은 클라이언트에서 서버로 데이터를 요청할 때, 그리고 post는 클라이언트에서 서버로 데이터를 전송할 때 사용
   console.log("insert router...");
   const data = req.body; //post 방식은 request body를 통해서 데이터를 전달하는 방식
   boardDAO.insert(data, (resp) => {
@@ -49,6 +46,9 @@ router.post("/update", function (req, res, next) {
   const data = req.body;
   boardDAO.update(data, (resp) => {
     res.json(resp);
+
+    //res.send랑 res.json의 차이
+    //Express.js에서 클라이언트에게 응답을 보낼 때 사용되는 두 가지 메서드
   });
 });
 module.exports = router;

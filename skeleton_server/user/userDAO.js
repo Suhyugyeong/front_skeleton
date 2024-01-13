@@ -28,7 +28,7 @@ const userDAO = {
       //getPool().getConnection()을 호출하여 데이터베이스 연결 풀에서 연결 객체(conn)를 얻습니다.
 
       console.log("dao", item);
-
+      //promise를 반환한다면 return new Promise(...) 혹은 async 함수 안에서 awit키워드를 사용할 것..
       //이메일 check sql 실행
       const [respCheck] = await conn.query(sql.checkId, item.email); //item 객체에서 email 프로퍼티를 추출한 값, 단일값
       //sql.checkId에 정의된 SQL 쿼리를 실행하고, item.email을 해당 쿼리에 전달합니다.
