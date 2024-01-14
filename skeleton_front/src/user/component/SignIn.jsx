@@ -373,7 +373,8 @@ const SignIn = () => {
     async (e) => {
       e.preventDefault();
       const resp = await axios.post("http://localhost:8000/users/signin", data);
-      if (resp.data.status === 500) window.alert(resp.data.message);
+      if (resp.data.status === 500)
+        window.alert(resp.data.message); //여기가 왜 resp.data.message일까??
       else navigate("/");
     },
     [data, navigate]

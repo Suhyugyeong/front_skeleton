@@ -11,7 +11,6 @@ const Home = () => {
 -class=>className
 -style : inline style, jsx - javascript 표현식으로.. 카멜케이스
 -이미지 경로 public의 images로 변경
-
 */}
       <div className="intro intro-carousel swiper position-relative">
         <div className="swiper-wrapper">
