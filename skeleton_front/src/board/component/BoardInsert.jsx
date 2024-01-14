@@ -134,20 +134,21 @@ import { useNavigate } from "react-router-dom";
 
 const BoardInsert = () => {
   const navigate = useNavigate();
-
   const [board, setBoard] = useState({ name: "", title: "", content: "" });
   const changeData = useCallback(
     (e) => {
+      //e는 이벤트 객체로, 주로 입력 요소의 값과 관련된 정보를 담고 있음
+      //밑에서 [e.target.name]처럼 이벤트 객체를 사용하기 때문에 적어줘야 함
       setBoard({ ...board, [e.target.name]: e.target.value });
     },
     [board]
-  );
+  ); //[board]가 변경될 때만 이 함수를 다시 만듦
 
   //등록 버튼 클릭시에..
   const insertBoard = useCallback(
     async (e) => {
       e.preventDefault();
-      await axios.post("http://localhost:8000/boards/insert", board);
+      await axios.post("http://localhost:8000/boards/insert", board); //board 상태를 요청의 본문으로 포함
       //화면을 자동으로 목록으로..
       navigate("/board/list");
     },
