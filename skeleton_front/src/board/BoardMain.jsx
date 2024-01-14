@@ -36,9 +36,14 @@ const BoardMain = () => {
       <h2>Board Main</h2>
       <Routes>
         <Route path="/list" element={<BoardList />} />
+        {/* 메뉴글목록, 게시글 등록화면 */}
         <Route path="/insert" element={<BoardInsert />} />
+        {/* 게시글 등록하기 */}
         <Route path="/detail/:id" element={<BoardDetail />} />
+        {/* 게시글 상태보기 */}
         <Route path="/update/:id" element={<BoardUpdate />} />
+        {/* 게시글수정  */}
+        {/* delete, 상세보기의 경우 server에서 board/board/:id, 게시글목록조회 server측 boards/boardList */}
       </Routes>
     </div>
   );
