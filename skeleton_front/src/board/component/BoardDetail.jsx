@@ -124,7 +124,8 @@ const BoardDetail = () => {
 
   //라우터에의해 내가 출력되었는데.. 출력시킨 path 조건에서 데이터 획득..
   //즉 자신은 board/1 이런 구조의 url 에 의해 실행.. 1 값 획득..
-  const { id } = useParams();
+  const { id } = useParams(); // 현재 경로에서 추출한 매개변수(parameter)를 가져옴
+  //"/users/123"이라면 id는 "123"
 
   //서버에서 받은 데이터.. 초기값 비어 있는
   const [board, setBoard] = useState({
@@ -138,7 +139,7 @@ const BoardDetail = () => {
   //서버 연동을 위한 함수.. 어디선가 호출한다..
   const getBoardDetail = async () => {
     const resp = await axios.get("http://localhost:8000/boards/board/" + id);
-    setBoard(resp.data.data);
+    setBoard(resp.data.data); // 서버에서 받아온 특정 글의 상세 정보가 담겨 있음
   };
 
   const deleteBoard = async (id) => {
@@ -149,8 +150,10 @@ const BoardDetail = () => {
   };
 
   useEffect(() => {
-    getBoardDetail();
-  }, []);
+    getBoardDetail(); //이 함수는 컴포넌트가 렌더링될 때 한 번 실행됩니다.
+  }, []); //빈 배열이므로, 해당 효과는 컴포넌트가 처음 마운트될 때만 실행되고, 그 이후에는 다시 실행되지 않습니다.
+  // 컴포넌트가 처음 렌더링될 때 getBoardDetail 함수를 호출하여 특정 글의 상세 정보를 서버에서 가져오게 합니다.
+  //이렇게 함으로써 해당 컴포넌트가 화면에 표시되는 시점에 특정 글의 상세 정보를 가져와서 렌더링할 수 있습니다.
   return (
     <main id="main">
       <section className="intro-single">
