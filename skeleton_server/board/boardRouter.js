@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const boardDAO = require("./boardDAO");
 
-//get이니까 조회
+//1번
+//get이니까 조회(원래 있던 게시판 목록이 안 보임, add버튼은 되나 입력버튼 눌러도 아무것도 추가 안 됨, 취소해서 돌아가도 원래 있던 게시판 목록은 안 보임 )
 //게시판 목록 조회
 //async 대신에 function을 넣는 이유가 도대체 뭘까???
 //함수표현식/ 콜백 함수로 function(req,res,next) 형태를 가진다.. 여기서 비동기 작업을 처리하지 않는다
@@ -14,7 +15,8 @@ router.get("/boardList", function (req, res, next) {
   });
 });
 
-//게시글 등록
+//2번
+//게시글 등록(게시판 목록은 뜨고, add버튼 먹고, 취소해도 원래화면 잘 보임 그러나 입력버튼을 눌러도 아무런 변화가 없다, 목록보기, 수정, 삭제 다 잘 됨)
 //여기서는 function 대신 화살표로 함수표현식
 router.post("/insert", (req, res, next) => {
   //get이 아니라 post..? get은 클라이언트에서 서버로 데이터를 요청할 때, 그리고 post는 클라이언트에서 서버로 데이터를 전송할 때 사용
@@ -26,7 +28,8 @@ router.post("/insert", (req, res, next) => {
   });
 });
 
-//게시글 상세보기
+//3번
+//게시글 상세보기(게시판 목록 뜨고, add버튼 먹고, 취소해도 원래화면 잘 보임, 입력버튼도 잘 됨, 그러나 게시글 상세보기 하면 내용은 안 뜸. 수정, 삭제 안됨)
 router.get("/board/:id", function (req, res, next) {
   console.log("board router...");
   // const { id } = req.params;
@@ -40,6 +43,7 @@ router.get("/board/:id", function (req, res, next) {
 //post방식 유저입력은 post 방식으로 프론트부터 개발하는게 보편적
 //get방식 프론트가 개발되기 전 백엔드 먼저개발하고 브라우저에서 직접 url입력해서 테스트 되어야
 
+//4번
 //게시글 삭제
 //일반적으로 게시글 삭제는 router.delete, 게시글 수정이나 업데이트는 router.put를 사용 기존 코드와의 호환성 등의 이유로 HTTP POST를 사용하는 경우도 있음
 router.post("/delete/:id", function (req, res, next) {
@@ -60,6 +64,7 @@ router.post("/delete/:id", function (req, res, next) {
 //   });
 // });
 
+//5번
 //게시글 수정
 router.post("/update", function (req, res, next) {
   //post는 데이터가 body ..업데이트는 body 로 받겠다..
