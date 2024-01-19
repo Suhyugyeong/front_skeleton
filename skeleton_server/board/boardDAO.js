@@ -31,6 +31,7 @@ const boardDAO = {
       if (conn !== null) conn.release(); // 커넥션 획득 후 사용이 끝난 경우에는 반드시 release() 메서드
     }
   },
+  
   insert: async (item, callback) => {
     //매개변수 두개인 이유 insert 데이터 받아야 되니까
     // const { name, title, content } = item; //
@@ -55,6 +56,7 @@ const boardDAO = {
       if (conn !== null) conn.release();
     }
   },
+
   board: async (item, callback) => {
     //게시글 상세보기
     //item이 id값이다
@@ -80,6 +82,7 @@ const boardDAO = {
       if (conn !== null) conn.release();
     }
   },
+
   delete: async (item, callback) => {
     let conn = null;
     try {
@@ -98,6 +101,7 @@ const boardDAO = {
       if (conn !== null) conn.release();
     }
   },
+
   update: async (item, callback) => {
     let conn = null;
     try {

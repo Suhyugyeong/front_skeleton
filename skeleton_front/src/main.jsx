@@ -22,6 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       {/* React Router의 핵심 컴포넌트 중 하나 */}
+      {/* 는 라우터 컴포넌트의 루트를 정의합니다. 그 아래에 있는 모든 컴포넌트들은 이 라우터의 영향을 받게 되며, URL의 변화에 따라 해당하는 컴포넌트를 렌더링하게 됩니다. */}
       <App />
     </BrowserRouter>
   </React.StrictMode>
