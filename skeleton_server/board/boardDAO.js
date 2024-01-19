@@ -31,7 +31,7 @@ const boardDAO = {
       if (conn !== null) conn.release(); // 커넥션 획득 후 사용이 끝난 경우에는 반드시 release() 메서드
     }
   },
-  
+
   insert: async (item, callback) => {
     //매개변수 두개인 이유 insert 데이터 받아야 되니까
     // const { name, title, content } = item; //
@@ -57,6 +57,8 @@ const boardDAO = {
     }
   },
 
+  //item 여부 :
+  // 예를 들어, detail 함수에서 item은 상세 정보를 조회할 때 어떤 상품의 정보를 조회할 것인지를 지정하는 데 사용될 수 있습니다. 마찬가지로 bidding 함수에서는 어떤 상품에 입찰을 진행할지에 대한 정보를 item을 통해 받아서 처리할 수 있습니다.
   board: async (item, callback) => {
     //게시글 상세보기
     //item이 id값이다
