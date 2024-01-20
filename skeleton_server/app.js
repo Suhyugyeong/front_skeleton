@@ -30,6 +30,7 @@ app.use(express.static(path.join(__dirname, "public"))); // "public" 디렉토�
 
 //클라이언트 요청 데이터, 응답 데이터를 위해서
 app.use(express.json());
+//Express에서 JSON 데이터를 사용하려면
 app.use(express.urlencoded({ extended: true }));
 
 //개발자가 각 파일로 분리시킨 라우터 등록
