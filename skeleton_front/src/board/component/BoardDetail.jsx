@@ -131,10 +131,10 @@ const BoardDetail = () => {
   //서버에서 받은 데이터.. 초기값 비어 있는
   const [board, setBoard] = useState({
     name: "",
-    content: "",
-    title: "",
+    content: "", //
+    title: "", //
     cnt: "",
-    createdAt: "",
+    createdAt: "", //
   });
 
   //서버 연동을 위한 함수.. 어디선가 호출한다..
