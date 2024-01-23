@@ -138,6 +138,7 @@ const BoardDetail = () => {
   });
 
   //서버 연동을 위한 함수.. 어디선가 호출한다..
+  //이게 아무것도 안 뜨는데....?
   const getBoardDetail = async () => {
     const resp = await axios.get("http://localhost:8000/boards/board/" + id);
     setBoard(resp.data.data); // 서버에서 받아온 특정 글의 상세 정보가 담겨 있음

@@ -144,6 +144,8 @@ const BoardUpdate = () => {
     email: "",
     title: "",
     content: "",
+    //수정 내용은 타이틀이랑 내용
+    //리스트 페이지는 번호, 타이틀, 이름, 작성일,조회수
   });
 
   const changeData = (e) => {
@@ -163,6 +165,9 @@ const BoardUpdate = () => {
   const updateBoard = async (e) => {
     await axios.post("http://localhost:8000/boards/update/", board);
     navigate("/board/list");
+    //url: 요청을 보낼 서버의 URL입니다.
+    //data: 서버로 보낼 데이터입니다. 이는 객체 형태로 전달됩니다.
+    //config: 선택적으로 설정할 수 있는 요청 구성 옵션입니다.
   };
   return (
     <main id="main">

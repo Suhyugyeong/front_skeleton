@@ -185,7 +185,6 @@ const BoardList = () => {
                   {boardList.data.map((board) => (
                     //boardList.data 배열을 매핑하여 게시판의 각 항목을 테이블 행(<tr>)으로 만들고 있음
                     <tr key={board.id}>
-                      //
                       {/* key 속성은 React에서 목록의 각 항목을 구별하는 데 사용되는 고유 식별자 */}
                       <td>{board.id}</td>
                       <td>
